@@ -1,101 +1,64 @@
-👕 FitSense AI
-Upload a photo. Get your size. Brand by brand.
+**FitSense AI**
+**AI-Powered Personalized Clothing Size Recommendation Platform**
 
-FitSense AI is an AI-powered, full-stack clothing size recommendation platform that estimates body features from a suitable photograph and recommends an appropriate clothing size using each brand's own size chart.
+Upload a suitable photograph, analyze body features using computer vision, and receive a clothing size recommendation based on the selected brand's size chart.
 
-Project Status: 🚧 Planning
-License: MIT
+📌 Project Overview
 
-📖 Overview
+FitSense AI is a full-stack AI application designed to simplify clothing size selection for online shopping.
 
-Buying clothes online often means guessing your size. The same person may be an M in Brand A, an L in Brand B, and an M in Brand C because clothing sizes vary between brands.
+The system analyzes a user's uploaded photograph, estimates relevant body features, and compares the results against brand-specific clothing size charts to recommend an appropriate size.
 
-FitSense AI aims to reduce this uncertainty by combining computer vision with brand-specific size charts.
+The platform is designed to address the problem of inconsistent sizing across different clothing brands.
 
-Full-body photo
-      ↓
+🎯 Problem Statement
+
+Online clothing shoppers frequently face difficulties selecting the correct size because:
+
+Clothing sizes vary between brands.
+Users may not know their body measurements.
+Traditional size charts require manual measurements.
+Incorrect size selection can lead to unnecessary returns.
+
+FitSense AI aims to reduce this uncertainty through computer vision and personalized size recommendations.
+
+💡 Proposed Solution
+
+The system follows a structured pipeline:
+
+User Photo
+     ↓
+Image Validation
+     ↓
 Computer Vision
-      ↓
-Estimated Body Features
-      ↓
+     ↓
+Body Feature Estimation
+     ↓
 Brand Size Chart
-      ↓
-Recommended Size
+     ↓
+Size Recommendation
 
-⚠️ Honest by design: Measurements estimated from a single 2D photograph are estimates, not physical measurements. FitSense AI will present results as estimates with an appropriate confidence indicator.
+The recommendation is based on estimated body features and the selected brand's sizing standards.
 
-🚧 Project Status
+✨ Key Features
+Feature	Description
+User Authentication	Secure registration and login using JWT
+Image Upload	Upload and validate a suitable full-body photograph
+Computer Vision	Detect body pose and relevant landmarks
+Body Feature Estimation	Estimate relevant body measurements/features
+Brand Selection	Select the clothing brand and category
+Size Recommendation	Match estimated features against the brand's size chart
+Recommendation Explanation	Explain why a particular size was recommended
+User Feedback	Collect fit feedback for future improvements
+🧠 AI & Computer Vision Pipeline
 
-FitSense AI is currently in the planning and design phase.
-
-This README describes the intended architecture, MVP scope, technical approach, limitations, and development roadmap.
-
-Features marked as planned have not been implemented yet.
-
-✨ Planned MVP Features
-Area	Feature
-🔐 Authentication	User registration and login with JWT-based authentication
-🏷️ Selection	Select clothing category and brand
-📸 Image Upload	Secure full-body photograph upload with input validation
-🧠 Computer Vision	Person detection → pose estimation → body landmarks
-📏 Estimation	Estimate relevant body features such as chest and waist ranges
-🎯 Recommendation	Match estimated features against the selected brand's size chart
-💬 Feedback	User can provide feedback: Too Tight / Correct Fit / Too Loose
-MVP Scope
-
-The first MVP will focus on men's T-shirts and a limited number of brands.
-
-The goal is to build and validate the complete pipeline before expanding to additional clothing categories.
-
-🔄 How FitSense AI Works
-Example Result
-Recommended Size: L
-
-Brand: Example Brand
-Category: T-Shirt
-
-Estimated Features:
-Chest: approximately 40–41 in
-Waist: approximately 34–35 in
-
-Confidence:
-Estimated / Experimental
-🏗️ System Architecture
-
-FitSense AI is designed as three primary application services:
-
-React frontend
-Spring Boot backend
-Python/FastAPI computer-vision service
-
-These services communicate with the database and image-storage layer.
-
-🛠️ Technology Stack
-Layer	Technology	Responsibility
-Frontend	React	UI, image upload, brand/category selection, results and feedback
-Backend	Java + Spring Boot	REST APIs, authentication, business logic and orchestration
-Build Tool	Maven	Spring Boot dependency and build management
-Security	Spring Security + JWT	Authentication and authorization
-AI Service	Python + FastAPI	Computer-vision API
-Computer Vision	OpenCV + MediaPipe Pose	Image processing, pose estimation and body landmarks
-Database	PostgreSQL	Users, brands, size charts, predictions and feedback
-Storage	Supabase Storage	Private image storage for the prototype
-DevOps	Docker	Containerization
-Version Control	Git + GitHub	Source-code management
-CI/CD	GitHub Actions	Planned
-Cloud	AWS	Planned for later deployment
-
-The exact computer-vision model will be selected after evaluating accuracy, performance, complexity, and licensing.
-
-🧠 Computer Vision Pipeline
-
-FitSense AI will use a dedicated computer-vision pipeline rather than asking a general-purpose LLM to directly predict a person's clothing size.
+FitSense AI uses a dedicated computer-vision pipeline instead of relying on a general-purpose language model to directly predict clothing size.
 
 Uploaded Image
       ↓
 Image Validation
       ↓
-Person Detection / Segmentation
+Person Detection
       ↓
 Pose Estimation
       ↓
@@ -107,285 +70,214 @@ Measurement Estimation
       ↓
 Size Recommendation
 
-Potential technologies include:
+Potential technologies include OpenCV, MediaPipe Pose, and other suitable computer-vision models.
 
-OpenCV
-MediaPipe Pose
-YOLO or another suitable detection model
-Python
-FastAPI
+The final model will be selected after evaluating accuracy, performance, complexity, and licensing requirements.
 
-The final computer-vision model will be selected after experimentation and evaluation.
+🏗️ System Architecture
+                  ┌─────────────────┐
+                  │      User       │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ React Frontend  │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ Spring Boot API │
+                  └────┬───────┬────┘
+                       │       │
+             ┌─────────┘       └─────────┐
+             ▼                           ▼
+      ┌──────────────┐             ┌──────────────┐
+      │ PostgreSQL   │             │   Supabase   │
+      │   Database   │             │    Storage   │
+      └──────────────┘             └──────┬───────┘
+                                          │
+                                          ▼
+                                 ┌────────────────┐
+                                 │ Python FastAPI │
+                                 │ AI Service     │
+                                 └────────────────┘
+🛠️ Technology Stack
+Layer	Technology
+Frontend	React
+Backend	Java, Spring Boot
+Build Tool	Maven
+Security	Spring Security, JWT
+AI Service	Python, FastAPI
+Computer Vision	OpenCV, MediaPipe
+Database	PostgreSQL
+Image Storage	Supabase Storage
+Containerization	Docker
+Version Control	Git, GitHub
+Cloud Deployment	AWS — planned
+🎯 MVP Scope
 
-Why not simply use an LLM?
+The initial MVP will focus on men's T-shirts and a limited number of supported brands.
 
-A general-purpose LLM should not be treated as the primary measurement system.
+The MVP will include:
 
-A dedicated computer-vision pipeline allows the process to be:
+User authentication
+Brand and clothing-category selection
+Full-body image upload
+Image validation
+Pose estimation
+Body landmark detection
+Body feature estimation
+Brand-specific size charts
+Rule-based size recommendation
+Recommendation explanation
+User feedback
 
-More structured
-Testable
-Reproducible
-Easier to evaluate
-Easier to improve
+The system will be expanded to additional clothing categories and brands after validating the initial pipeline.
 
-The recommendation should be traceable from image → landmarks → estimated features → size chart → recommendation.
+📏 Size Recommendation Engine
 
-🎯 Size Recommendation Engine
-
-The initial version will use a transparent, rule-based recommendation engine.
+The initial recommendation engine will use a transparent rule-based approach.
 
 For example:
 
-Estimated Chest = 40.5 inches
+Estimated Chest: 40.5 inches
 
-Brand A:
+Brand Size Chart:
 
 M → 38–40 inches
 L → 40–42 inches
 
-Therefore:
-
 Recommended Size → L
 
-The size charts will be stored in the database.
+Future versions may incorporate machine learning using:
 
-Future ML Layer
-
-Later versions can introduce machine learning using features such as:
-
-Estimated body characteristics
-Clothing category
+Body features
 Brand
+Clothing category
 Fit preference
 User feedback
 Purchase history
+🔐 Privacy & Security
 
-This allows FitSense AI to gradually move from a rule-based recommendation system toward a personalized recommendation system.
+User photographs may contain sensitive personal information. FitSense AI will therefore follow a privacy-conscious approach.
 
-🗃️ Data Model
+The system will consider:
 
-The initial database will contain entities such as:
+Private image storage
+Access-controlled files
+HTTPS communication
+JWT authentication
+Minimal image retention
+User-controlled image deletion
+Avoiding unnecessary storage of original photographs
 
-Users
-Brands
-Clothing Categories
-Size Charts
-Size Chart Measurements
-Predictions
-User Feedback
-🔒 Privacy & Security
+Where practical, original photographs may be deleted after processing.
 
-User photographs may contain sensitive personal information, so privacy will be part of the system design.
-
-The application will consider:
-
-🔐 Private and access-controlled image storage
-🌐 HTTPS
-🔑 JWT-based authentication
-🗑️ Image deletion
-⏱️ Minimal image retention
-🚫 Avoiding unnecessary storage of original photographs
-
-Where practical, original photographs can be deleted after processing.
-
-📷 Recommended Image Conditions
-
-For better estimation, users should provide an image where:
-
-The full body is visible
-The person is standing upright
-The person is facing the camera
-Lighting is good
-The body is not significantly obstructed
-Clothing is reasonably fitted rather than extremely loose
-The camera is at an appropriate distance
-⚠️ Limitations
+⚠️ Technical Limitations
 
 A single 2D photograph does not provide a reliable physical scale.
 
-Therefore, FitSense AI cannot guarantee exact physical measurements from a photograph.
+Therefore, FitSense AI will provide estimated body features rather than guaranteed physical measurements.
 
-Accuracy may depend on:
+Prediction quality may depend on:
 
 Image quality
 Camera angle
-Pose
 Lighting
+Pose
 Clothing
-Body obstruction
+Body visibility
 Camera distance
 
-The MVP will therefore treat measurements as estimates.
+Future versions may explore front + side image analysis and optional user-provided height for improved scale estimation.
 
-Planned Improvements
-
-Future versions may explore:
-
-Front Photo
-     +
-Side Photo
-     ↓
-Improved Body Estimation
-
-Other possibilities include:
-
-Optional user-provided height for scale calibration
-Confidence scoring
-Better pose validation
-Advanced body/3D estimation
-📁 Project Structure
-
-The intended repository structure is:
-
-FitSense-AI/
-│
-├── frontend/
-│   └── React application
-│
-├── backend/
-│   └── Spring Boot REST API
-│
-├── ai-service/
-│   └── FastAPI + OpenCV + MediaPipe
-│
-├── docker-compose.yml
-│
-├── README.md
-│
-└── .gitignore
-🚀 Getting Started
-
-Note: FitSense AI is currently in the planning phase. The following setup instructions describe the intended project structure and will be updated as implementation progresses.
-
-Prerequisites
-Node.js 18+
-Java 17+
-Maven
-Python 3.10+
-Docker
-Docker Compose
-Supabase account/project
-Clone the Repository
-git clone https://github.com/avinashtech18/FitSense-AI.git
-cd FitSense-AI
-Intended Services
-AI Service
-cd ai-service
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-Spring Boot Backend
-cd backend
-./mvnw spring-boot:run
-React Frontend
-cd frontend
-npm install
-npm run dev
-Docker
-
-The planned Docker workflow will eventually allow the entire application to be started using:
-
-docker compose up --build
-🔐 Environment Variables
-
-Sensitive credentials should never be committed to GitHub.
-
-The planned environment variables include:
-
-# Backend
-SPRING_DATASOURCE_URL=
-SPRING_DATASOURCE_USERNAME=
-SPRING_DATASOURCE_PASSWORD=
-JWT_SECRET=
-AI_SERVICE_URL=http://localhost:8000
-
-# Supabase
-SUPABASE_URL=
-SUPABASE_SERVICE_KEY=
-SUPABASE_BUCKET=fitsense-images
 🗺️ Development Roadmap
-Phase 1 — Foundation
- Project architecture
- React application
- Spring Boot application
- PostgreSQL setup
+Phase 1 — Project Foundation
+ Repository setup
+ React frontend
+ Spring Boot backend
+ PostgreSQL integration
  Basic REST APIs
 Phase 2 — Authentication
  User registration
  Login
  Spring Security
  JWT authentication
-Phase 3 — Image Pipeline
+Phase 3 — Image Processing
  Image upload
  Supabase Storage
  Image validation
- Python FastAPI service
+ FastAPI service
 Phase 4 — Computer Vision
  Person detection
  Pose estimation
  Body landmarks
  Feature extraction
  Measurement estimation
-Phase 5 — Size Recommendation
+Phase 5 — Recommendation Engine
  Brand database
  Size-chart database
- Rule-based recommendation engine
- Recommendation API
- Result UI
-Phase 6 — Feedback
- Too tight
- Correct fit
- Too loose
- Store prediction feedback
-Phase 7 — Advanced Features
- Optional height input
- Front + side photo analysis
- Personalized fit preferences
+ Recommendation logic
+ Result interface
+ User feedback
+Phase 6 — Advanced Personalization
  Additional clothing categories
  Additional brands
- Feedback-driven ML model
+ Fit preferences
+ Feedback-based ML
  Purchase history
- E-commerce integration
- Virtual try-on
+🔮 Future Scope
+
+The long-term vision is to evolve FitSense AI into a personalized clothing-fit platform supporting:
+
+Multiple clothing categories
+Multiple brands
+Front and side image analysis
+Personalized fit preferences
+Feedback-driven recommendations
+Purchase-history-based personalization
+E-commerce integration
+Virtual try-on
+📁 Project Structure
+FitSense-AI/
+│
+├── frontend/
+│   └── React Application
+│
+├── backend/
+│   └── Spring Boot REST API
+│
+├── ai-service/
+│   └── FastAPI Computer Vision Service
+│
+├── docker-compose.yml
+├── README.md
+└── .gitignore
 🧪 Testing Strategy
 
-Testing will be introduced throughout development.
+Testing will be implemented across all major components.
 
 Backend
-Unit tests
-REST API tests
-Authentication tests
-Size recommendation engine tests
+
+Unit testing
+REST API testing
+Authentication testing
+Recommendation-engine testing
+
 AI Service
+
 Image-processing tests
 Computer-vision pipeline tests
 Sample-image evaluation
+
 Frontend
-Component tests
+
+Component testing
 Form validation
 API integration testing
-🤝 Contributing
+👨‍💻 Developer
 
-Contributions, ideas, and feedback are welcome.
+Avinash
 
-git checkout -b feature/your-feature
-git add .
-git commit -m "Add your feature"
-git push origin feature/your-feature
-
-Then create a Pull Request.
-
-📄 License
-
-This project is distributed under the MIT License.
-
-See LICENSE for details.
-
-<div align="center">
-👨‍💻 Built by Avinash
-
-FitSense AI — Personalized clothing size recommendations using computer vision.
-
-⭐ If you find this project interesting, consider giving it a star!
-
-</div>
+FitSense AI
+AI-powered personalized clothing size recommendation platform.
