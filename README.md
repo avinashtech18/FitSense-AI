@@ -3,6 +3,7 @@
 
 **Upload a suitable photograph, analyze body features using computer vision, and receive a clothing size recommendation based on the selected brand's size chart.
 **
+
 📌 **Project Overview**
 
 FitSense AI is a full-stack AI application designed to simplify clothing size selection for online shopping.
