@@ -74,46 +74,71 @@ Potential technologies include OpenCV, MediaPipe Pose, and other suitable comput
 
 The final model will be selected after evaluating accuracy, performance, complexity, and licensing requirements.
 
-🏗️** System Architecture**
-                  ┌─────────────────┐
-                  │      User       │
-                  └────────┬────────┘
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │ React Frontend  │
-                  └────────┬────────┘
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │ Spring Boot API │
-                  └────┬───────┬────┘
-                       │       │
-             ┌─────────┘       └─────────┐
-             ▼                           ▼
-      ┌──────────────┐             ┌──────────────┐
-      │ PostgreSQL   │             │   Supabase   │
-      │   Database   │             │    Storage   │
-      └──────────────┘             └──────┬───────┘
-                                          │
-                                          ▼
-                                 ┌────────────────┐
-                                 │ Python FastAPI │
-                                 │ AI Service     │
-                                 └────────────────┘
-🛠️ **Technology Stack**
-Layer	Technology
-Frontend	React
-Backend	Java, Spring Boot
-Build Tool	Maven
-Security	Spring Security, JWT
-AI Service	Python, FastAPI
-Computer Vision	OpenCV, MediaPipe
-Database	PostgreSQL
-Image Storage	Supabase Storage
-Containerization	Docker
-Version Control	Git, GitHub
-Cloud Deployment	AWS — planned
+## **🏗️ System Architecture**
+
+```text
+                         ┌──────────────────┐
+                         │       User       │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │  React Frontend  │
+                         └────────┬─────────┘
+                                  │
+                            REST + JWT
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │  Spring Boot API │
+                         └───────┬───┬──────┘
+                                 │   │
+                    ┌────────────┘   └─────────────┐
+                    ▼                              ▼
+          ┌──────────────────┐            ┌──────────────────┐
+          │    PostgreSQL    │            │ Supabase Storage │
+          │     Database     │            │   Image Storage  │
+          └──────────────────┘            └────────┬─────────┘
+                                                   │
+                                                   ▼
+                                          ┌──────────────────┐
+                                          │  Python FastAPI  │
+                                          │   AI Service     │
+                                          └────────┬─────────┘
+                                                   │
+                                                   ▼
+                                          ┌──────────────────┐
+                                          │ Computer Vision  │
+                                          │ OpenCV / Pose    │
+                                          │    Estimation    │
+                                          └──────────────────┘
+
+**Important:** Make sure the opening and closing triple backticks are actually present in the README. The architecture itself should be inside a `text` code block.
+
+---
+
+## **Technology Stack**
+
+Your current table is also getting merged together.
+
+Use this exact Markdown:
+
+```markdown
+## **🛠️ Technology Stack**
+
+| **Layer** | **Technology** | **Purpose** |
+|---|---|---|
+| **Frontend** | React | User interface and image upload |
+| **Backend** | Java + Spring Boot | REST APIs and business logic |
+| **Build Tool** | Maven | Dependency and build management |
+| **Security** | Spring Security + JWT | Authentication and authorization |
+| **AI Service** | Python + FastAPI | AI and computer-vision processing |
+| **Computer Vision** | OpenCV + MediaPipe | Image processing and pose estimation |
+| **Database** | PostgreSQL | Users, brands, size charts and predictions |
+| **Image Storage** | Supabase Storage | Private image storage |
+| **Containerization** | Docker | Application containerization |
+| **Version Control** | Git + GitHub | Source-code management |
+| **Cloud** | AWS | Planned deployment infrastructure |
 🎯 **MVP Scope**
 
 The initial MVP will focus on men's T-shirts and a limited number of supported brands.
@@ -238,7 +263,9 @@ Feedback-driven recommendations
 Purchase-history-based personalization
 E-commerce integration
 Virtual try-on
-📁 **Project Structure**
+## **📁 Project Structure**
+
+```text
 FitSense-AI/
 │
 ├── frontend/
@@ -253,28 +280,36 @@ FitSense-AI/
 ├── docker-compose.yml
 ├── README.md
 └── .gitignore
-🧪 **Testing Strategy**
+
+---
+
+## **Testing Strategy**
+
+Also format this as proper subsections:
+
+```markdown
+## **🧪 Testing Strategy**
 
 Testing will be implemented across all major components.
 
-Backend
+### **Backend**
 
-Unit testing
-REST API testing
-Authentication testing
-Recommendation-engine testing
+- Unit testing
+- REST API testing
+- Authentication testing
+- Recommendation-engine testing
 
-AI Service
+### **AI Service**
 
-Image-processing tests
-Computer-vision pipeline tests
-Sample-image evaluation
+- Image-processing tests
+- Computer-vision pipeline tests
+- Sample-image evaluation
 
-Frontend
+### **Frontend**
 
-Component testing
-Form validation
-API integration testing
+- Component testing
+- Form validation
+- API integration testing
 👨‍💻 Developer
 
 **Avinash**
