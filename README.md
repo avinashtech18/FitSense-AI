@@ -117,7 +117,7 @@ The final model will be selected after evaluating accuracy, performance, complex
 **Important:** Make sure the opening and closing triple backticks are actually present in the README. The architecture itself should be inside a `text` code block.
 
 ---
-text'''
+'''text
 
 ## **Technology Stack**
 
